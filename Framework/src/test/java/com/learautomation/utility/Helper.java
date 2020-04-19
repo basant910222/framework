@@ -14,19 +14,20 @@ public class Helper {
 	
 	//Screenshot, alerts, fames, windows, sync issue, javascript executor
 	
-	public static void CaptureScreenshot(WebDriver driver) {
+	public static String CaptureScreenshot(WebDriver driver) {
 		
 		File src=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-				
+		String screenshotPath=System.getProperty("user.dir")+"./Screenshots/"+ getCurrentDateTime() + ".png";	
 		try{
-			FileHandler.copy(src, new File("./Screenshots/"+ getCurrentDateTime() + ".png"));
+			FileHandler.copy(src, new File(screenshotPath));
 		    System.out.println("screenshot passed");
 		
 		} 
 		
 		catch(Exception e) {
 			System.out.println("unable to capture screenshot"+e.getMessage());
-		}			
+		}	
+		return screenshotPath;
 	}
 	
 public static String getCurrentDateTime() {
